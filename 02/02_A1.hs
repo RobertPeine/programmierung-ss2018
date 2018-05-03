@@ -72,3 +72,13 @@ rotate'' xxs@(x:xs) n
   | otherwise = rotate'' xxs (length xxs + n `mod` length xxs)
 
 -- Es gilt: mod n (length xxs) <=> n `mod` length xxs
+
+-- oder kürzer:
+
+rotate''' :: [Int] -> Int -> [Int]
+rotate''' [] _ = []
+rotate''' xxs@(x:xs) n
+  | n `mod` length xxs == 0 = xxs
+  | n > 0 = rotate''' (xs ++ [x]) (n' - 1)
+  | otherwise = rotate''' xxs (length xxs + n')
+  where n' = n `mod` length xxs
